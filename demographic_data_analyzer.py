@@ -34,7 +34,7 @@ def calculate_demographic_data(print_data=True):
     num_rich_higher_education = len(higher_education[higher_education.salary == ">50K"])
     higher_education_rich = round(num_rich_higher_education/len(higher_education) * 100 ,1)
 
-    num_rich_lower_education = len(lower_education[lower_education.salary == ">50K"])
+    num_rich_lower_education = len(lower_education[lower_education.salary == "<=50K"])
     lower_education_rich = round(num_rich_lower_education/len(lower_education) * 100 ,1)
 
     # What is the minimum number of hours a person works per week (hours-per-week feature)?
@@ -56,8 +56,8 @@ def calculate_demographic_data(print_data=True):
 
 
     # Identify the most popular occupation for those who earn >50K in India.
-    people_of_india = df[(df['native-country'] == 'India') & (df['salary'] == '>50K')]
-    occupation_count = people_of_india['occupation'].value_counts()
+    rich_people_of_india = df[(df['native-country'] == 'India') & (df['salary'] == '>50K')]
+    occupation_count = rich_people_of_india['occupation'].value_counts()
 
 
     top_IN_occupation = occupation_count.idxmax()
@@ -81,8 +81,8 @@ def calculate_demographic_data(print_data=True):
         'race_count': race_count,
         'average_age_men': average_age_men,
         'percentage_bachelors': percentage_bachelors,
-        'higher_edu_pop': higher_edu_pop,
-        'lower_edu_pop': lower_edu_pop,
+        'higher_edu_pop': higher_education_rich,
+        'lower_edu_pop': lower_education_rich,
         'min_work_hours': min_work_hours,
         'rich_percentage': rich_percentage,
         'highest_earning_country': highest_earning_country,
@@ -91,4 +91,4 @@ def calculate_demographic_data(print_data=True):
         'top_IN_occupation': top_IN_occupation
     }
 
-calculate_demographic_data()
+#calculate_demographic_data()
